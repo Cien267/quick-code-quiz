@@ -1,0 +1,58 @@
+[
+  {
+    "id": "q1",
+    "question": "What is a closure in JavaScript?",
+    "answer": "A closure is a function that remembers variables from its lexical scope even after the outer function has finished executing.",
+    "tags": ["javascript"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q2",
+    "question": "Explain REST vs GraphQL.",
+    "answer": "REST exposes multiple resource-oriented endpoints. GraphQL usually exposes one endpoint where clients request exactly the fields they need.",
+    "tags": ["backend", "api"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q3",
+    "question": "What is event delegation?",
+    "answer": "Event delegation attaches one listener to a parent element and uses event bubbling to handle events from matching child elements.",
+    "tags": ["javascript", "dom"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q4",
+    "question": "What problem does React state solve?",
+    "answer": "React state stores values that affect rendering. When state changes, React re-renders the component so the UI stays in sync with data.",
+    "tags": ["react"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q5",
+    "question": "What is the difference between useMemo and useCallback?",
+    "answer": "useMemo memoizes a computed value. useCallback memoizes a function reference. Both are performance tools and should be used when they solve a measured or likely re-render problem.",
+    "tags": ["react", "performance"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q6",
+    "question": "What is debouncing?",
+    "answer": "Debouncing delays running a function until a period of inactivity has passed, which is useful for search inputs, resize handlers, and expensive repeated events.",
+    "tags": ["javascript", "performance"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q7",
+    "question": "How does the browser critical rendering path work?",
+    "answer": "The browser parses HTML into the DOM, parses CSS into the CSSOM, combines them into a render tree, computes layout, paints pixels, and composites layers.",
+    "tags": ["browser", "performance"],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q8",
+    "question": "What are controlled components in React?",
+    "answer": "Controlled components keep form input values in React state. The rendered value comes from state and changes through event handlers.",
+    "tags": ["react", "forms"],
+    "difficulty": "medium"
+  }
+]
