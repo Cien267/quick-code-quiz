@@ -79,7 +79,7 @@ export function PracticeApp() {
       const matchesBookmarkRoute = !bookmarkRoute || bookmarkedIds.includes(question.id);
       return matchesTag && matchesDifficulty && matchesBookmarkRoute;
     });
-  }, [bookmarkedIds, bookmarkRoute, difficultyFilter, tagFilter]);
+  }, [bookmarkedIds, bookmarkRoute, difficultyFilter, questions, tagFilter]);
 
   useEffect(() => {
     const ids = filteredQuestions.map((question) => question.id);
