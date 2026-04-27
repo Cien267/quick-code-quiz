@@ -2,11 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { Bookmark, BookmarkCheck, ChevronLeft, ChevronRight, Eye, EyeOff, Shuffle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import rawQuestions from "@/data/questions.json";
 import { useLocalStorageState } from "@/hooks/useLocalStorageState";
 import type { Difficulty, InterviewQuestion } from "@/types/question";
 
-const questions = rawQuestions as InterviewQuestion[];
 const allDifficulties = ["all", "easy", "medium", "hard"] as const;
 type DifficultyFilter = (typeof allDifficulties)[number];
 
@@ -31,6 +29,9 @@ function normalizeIndex(index: number, total: number) {
 export function PracticeApp() {
   const location = useLocation();
   const bookmarkRoute = location.pathname === "/bookmarks";
+  const [questions, setQuestions] = useState<InterviewQuestion[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [bookmarkedIds, setBookmarkedIds] = useLocalStorageState<string[]>("interview-pwa-bookmarks", []);
   const [progress, setProgress] = useLocalStorageState<ProgressState>("interview-pwa-progress", {
     totalViewed: 0,
@@ -40,11 +41,36 @@ export function PracticeApp() {
   const [tagFilter, setTagFilter] = useState("all");
   const [difficultyFilter, setDifficultyFilter] = useState<DifficultyFilter>("all");
   const [randomMode, setRandomMode] = useState(false);
-  const [order, setOrder] = useState(() => questions.map((question) => question.id));
+  const [order, setOrder] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(progress.lastSessionIndex);
   const [showAnswer, setShowAnswer] = useState(false);
 
-  const tags = useMemo(() => Array.from(new Set(questions.flatMap((question) => question.tags))).sort(), []);
+  useEffect(() => {
+    let mounted = true;
+
+    fetch("/questions.json")
+      .then((response) => {
+        if (!response.ok) throw new Error("Questions failed to load");
+        return response.json() as Promise<InterviewQuestion[]>;
+      })
+      .then((data) => {
+        if (!mounted) return;
+        setQuestions(data);
+        setLoadError(false);
+      })
+      .catch(() => {
+        if (mounted) setLoadError(true);
+      })
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const tags = useMemo(() => Array.from(new Set(questions.flatMap((question) => question.tags))).sort(), [questions]);
 
   const filteredQuestions = useMemo(() => {
     return questions.filter((question) => {
@@ -183,7 +209,17 @@ export function PracticeApp() {
         <article className="relative overflow-hidden rounded-lg border border-border bg-card shadow-card">
           <div className="absolute inset-x-0 top-0 h-1 bg-accent" aria-hidden="true" />
           <div className="p-5 sm:p-8">
-            {currentQuestion ? (
+            {loading ? (
+              <div className="space-y-4 py-12 text-center">
+                <h2 className="text-2xl font-bold text-card-foreground">Loading questions</h2>
+                <p className="text-muted-foreground">Preparing your local practice deck.</p>
+              </div>
+            ) : loadError ? (
+              <div className="space-y-4 py-12 text-center">
+                <h2 className="text-2xl font-bold text-card-foreground">Questions unavailable</h2>
+                <p className="text-muted-foreground">Check public/questions.json and reload the app.</p>
+              </div>
+            ) : currentQuestion ? (
               <div key={currentQuestion.id} className="animate-fade-slide space-y-6 motion-reduce:animate-none">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex flex-wrap gap-2">
