@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Interview Practice Deck">
+  <rect width="512" height="512" rx="96" fill="#173978"/>
+  <path d="M132 154c0-22 18-40 40-40h168c22 0 40 18 40 40v204c0 22-18 40-40 40H172c-22 0-40-18-40-40V154Z" fill="#F9FBFC"/>
+  <path d="M184 194h144M184 248h144M184 302h88" stroke="#2FA49A" stroke-width="28" stroke-linecap="round"/>
+</svg>
