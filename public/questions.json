@@ -1,58 +1,170 @@
 [
   {
     "id": "q1",
-    "question": "What is a closure in JavaScript?",
-    "answer": "A closure is a function that remembers variables from its lexical scope even after the outer function has finished executing.",
-    "tags": ["javascript"],
-    "difficulty": "easy"
+    "question": "Explain how Vue 3 reactivity system works (track/trigger, effect, scheduler).",
+    "answer": "Vue 3 uses Proxy to intercept get/set operations. When a reactive property is accessed, it calls track() to collect dependencies. When it is mutated, trigger() notifies effects. Effects are scheduled and batched via a job queue to avoid redundant re-renders.",
+    "tags": ["vue", "reactivity", "internals"],
+    "difficulty": "hard"
   },
   {
     "id": "q2",
-    "question": "Explain REST vs GraphQL.",
-    "answer": "REST exposes multiple resource-oriented endpoints. GraphQL usually exposes one endpoint where clients request exactly the fields they need.",
-    "tags": ["backend", "api"],
-    "difficulty": "medium"
+    "question": "Describe the rendering pipeline in Vue from state change to DOM update.",
+    "answer": "When reactive state changes, Vue triggers a component's render effect. It generates a new Virtual DOM, diffs it with the previous one, and applies minimal patches to the real DOM. Updates are batched asynchronously for performance.",
+    "tags": ["vue", "rendering", "virtual-dom"],
+    "difficulty": "hard"
   },
   {
     "id": "q3",
-    "question": "What is event delegation?",
-    "answer": "Event delegation attaches one listener to a parent element and uses event bubbling to handle events from matching child elements.",
-    "tags": ["javascript", "dom"],
-    "difficulty": "easy"
+    "question": "What is the difference between watch and watchEffect in Vue 3?",
+    "answer": "watch tracks specific sources and provides old/new values with lazy execution. watchEffect automatically tracks dependencies and runs immediately. watch offers more control, while watchEffect is simpler but less explicit.",
+    "tags": ["vue", "reactivity", "side-effects"],
+    "difficulty": "medium"
   },
   {
     "id": "q4",
-    "question": "What problem does React state solve?",
-    "answer": "React state stores values that affect rendering. When state changes, React re-renders the component so the UI stays in sync with data.",
-    "tags": ["react"],
-    "difficulty": "easy"
+    "question": "How would you debug and optimize a slow Vue application?",
+    "answer": "Use Vue Devtools and browser profiler to identify bottlenecks. Optimize by reducing unnecessary re-renders, splitting components, using v-memo, lazy loading, and debouncing user input. Focus on minimizing DOM updates and reactive dependencies.",
+    "tags": ["vue", "performance"],
+    "difficulty": "hard"
   },
   {
     "id": "q5",
-    "question": "What is the difference between useMemo and useCallback?",
-    "answer": "useMemo memoizes a computed value. useCallback memoizes a function reference. Both are performance tools and should be used when they solve a measured or likely re-render problem.",
-    "tags": ["react", "performance"],
+    "question": "When would you use Pinia vs composables for state management?",
+    "answer": "Use Pinia for global, shared state across the app. Use composables for reusable logic that does not require global state. Avoid overusing global state to keep the app maintainable.",
+    "tags": ["vue", "state-management"],
     "difficulty": "medium"
   },
   {
     "id": "q6",
-    "question": "What is debouncing?",
-    "answer": "Debouncing delays running a function until a period of inactivity has passed, which is useful for search inputs, resize handlers, and expensive repeated events.",
-    "tags": ["javascript", "performance"],
-    "difficulty": "easy"
+    "question": "How do you design scalable component architecture in Vue?",
+    "answer": "Separate components into smart (container) and dumb (presentational) components. Use props and emits for communication, and composables for shared logic. Avoid tight coupling by keeping components focused and reusable.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "hard"
   },
   {
     "id": "q7",
-    "question": "How does the browser critical rendering path work?",
-    "answer": "The browser parses HTML into the DOM, parses CSS into the CSSOM, combines them into a render tree, computes layout, paints pixels, and composites layers.",
-    "tags": ["browser", "performance"],
+    "question": "How does Vue SSR work and what is hydration?",
+    "answer": "Vue SSR renders components on the server into HTML, which is sent to the client. Hydration attaches event listeners and makes the static HTML interactive. Issues can arise if server and client output do not match.",
+    "tags": ["vue", "ssr"],
     "difficulty": "hard"
   },
   {
     "id": "q8",
-    "question": "What are controlled components in React?",
-    "answer": "Controlled components keep form input values in React state. The rendered value comes from state and changes through event handlers.",
-    "tags": ["react", "forms"],
+    "question": "How do you handle race conditions in Vue (e.g., multiple API calls)?",
+    "answer": "Use techniques like AbortController to cancel outdated requests, or track the latest request and ignore older responses. Cleanup logic in watch or watchEffect helps prevent stale updates.",
+    "tags": ["vue", "async"],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q9",
+    "question": "What is your testing strategy for a Vue application?",
+    "answer": "Use unit tests for components and composables (Vue Test Utils), integration tests for feature flows, and end-to-end tests (Cypress/Playwright). Mock APIs and focus on behavior rather than implementation details.",
+    "tags": ["vue", "testing"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q10",
+    "question": "What are common pitfalls in Vue 3 reactivity?",
+    "answer": "Common pitfalls include losing reactivity when destructuring reactive objects, confusion between ref and reactive, unintended infinite loops in watch, and stale closures in async logic.",
+    "tags": ["vue", "reactivity"],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q11",
+    "question": "What is the difference between Options API and Composition API in Vue?",
+    "answer": "Options API organizes code by type (data, methods, computed), while Composition API organizes by logic using functions. Composition API improves reusability, scalability, and TypeScript support.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q12",
+    "question": "What is the difference between ref and reactive in Vue 3?",
+    "answer": "ref is used for primitive values or single reactive references and requires .value, while reactive is used for objects and arrays and allows direct property access. ref is more flexible, while reactive is better for grouped state.",
+    "tags": ["vue", "reactivity"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q13",
+    "question": "What is <script setup> in Vue 3 and its advantages?",
+    "answer": "<script setup> is a compile-time syntax sugar over setup() that reduces boilerplate. It eliminates the need for return statements and improves readability, performance, and TypeScript support.",
+    "tags": ["vue", "composition-api"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q14",
+    "question": "If you manipulate the real DOM manually, will Vue update the Virtual DOM accordingly?",
+    "answer": "No. Vue treats the reactive state as the source of truth. Manual DOM changes are not tracked and will be overwritten during the next render cycle.",
+    "tags": ["vue", "virtual-dom"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q15",
+    "question": "How do you share logic between components in Vue (Mixins vs Composables)?",
+    "answer": "Vue 2 uses Mixins, which can cause naming conflicts and implicit dependencies. Vue 3 uses composables, which are explicit, reusable functions that provide better maintainability and scalability.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q16",
+    "question": "How do you optimize performance in Vue applications?",
+    "answer": "Optimize by reducing unnecessary re-renders, using keep-alive, lazy loading components, v-once, v-memo, proper keys in v-for, splitting components, and using computed instead of watch when possible.",
+    "tags": ["vue", "performance"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q17",
+    "question": "What is the difference between Vue 2 and Vue 3 reactivity systems?",
+    "answer": "Vue 2 uses Object.defineProperty which has limitations with adding/removing properties and arrays. Vue 3 uses Proxy, which can intercept all operations, making reactivity more complete and efficient.",
+    "tags": ["vue", "reactivity", "internals"],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q18",
+    "question": "What is Pinia and how does it compare to Vuex?",
+    "answer": "Pinia is the official state management library for Vue 3. It is simpler than Vuex, removes the need for mutations, has better TypeScript support, and provides a more intuitive API.",
+    "tags": ["vue", "state-management"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q19",
+    "question": "How do you migrate a Vue 2 application to Vue 3?",
+    "answer": "Use the compatibility build to run Vue 2 code in Vue 3, fix deprecation warnings, update dependencies, and gradually refactor to Composition API. Key challenges include removed APIs and third-party library compatibility.",
+    "tags": ["vue", "migration"],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q20",
+    "question": "How do you handle side effects in Vue 3 Composition API?",
+    "answer": "Use lifecycle hooks like onMounted and onBeforeUnmount for component-based effects, and watch or watchEffect for reactive effects. Always clean up side effects to avoid memory leaks.",
+    "tags": ["vue", "reactivity", "side-effects"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q21",
+    "question": "How does tree-shaking work in Vue 3?",
+    "answer": "Vue 3 uses ES module named exports, allowing bundlers to include only the APIs that are used. This reduces bundle size compared to Vue 2's monolithic API structure.",
+    "tags": ["vue", "performance", "build"],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q22",
+    "question": "How does nextTick work in Vue?",
+    "answer": "nextTick allows code to run after Vue has finished updating the DOM asynchronously. Vue batches DOM updates, and nextTick ensures access to the updated DOM.",
+    "tags": ["vue", "reactivity"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q23",
+    "question": "How have you optimized a slow Vue component in a real project?",
+    "answer": "Identify bottlenecks using profiling tools, then reduce unnecessary re-renders by splitting components, optimizing v-for with keys, using memoization, and debouncing inputs. This improves rendering performance and responsiveness.",
+    "tags": ["vue", "performance", "real-world"],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q24",
+    "question": "How do you handle global error handling in Vue?",
+    "answer": "Use app.config.errorHandler for global errors, try/catch for local logic, and centralized API error handling with interceptors. Log errors to monitoring tools and provide user-friendly feedback.",
+    "tags": ["vue", "error-handling"],
     "difficulty": "medium"
   }
 ]
