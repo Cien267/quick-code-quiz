@@ -173,5 +173,12 @@
     "answer": "Vue queues reactive effects and deduplicates them using a job queue. Updates are flushed asynchronously in microtasks, ensuring multiple state changes result in a single render cycle.",
     "tags": ["vue", "internals", "scheduler"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q26",
+    "question": "What problems can arise from improper use of watch and how do you avoid them?",
+    "answer": "Improper use of watch can cause infinite loops, redundant API calls, and performance issues. Avoid this by controlling dependencies, using immediate/flush options carefully, and cleaning up side effects.",
+    "tags": ["vue", "reactivity"],
+    "difficulty": "hard"
   }
 ]
