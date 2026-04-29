@@ -166,5 +166,12 @@
     "answer": "Use app.config.errorHandler for global errors, try/catch for local logic, and centralized API error handling with interceptors. Log errors to monitoring tools and provide user-friendly feedback.",
     "tags": ["vue", "error-handling"],
     "difficulty": "medium"
+  },
+  {
+    "id": "q25",
+    "question": "How does Vue's scheduler work internally and how does it batch updates?",
+    "answer": "Vue queues reactive effects and deduplicates them using a job queue. Updates are flushed asynchronously in microtasks, ensuring multiple state changes result in a single render cycle.",
+    "tags": ["vue", "internals", "scheduler"],
+    "difficulty": "hard"
   }
 ]
