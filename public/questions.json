@@ -180,5 +180,12 @@
     "answer": "Improper use of watch can cause infinite loops, redundant API calls, and performance issues. Avoid this by controlling dependencies, using immediate/flush options carefully, and cleaning up side effects.",
     "tags": ["vue", "reactivity"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q27",
+    "question": "How do you design a composable that is both reusable and avoids shared state bugs?",
+    "answer": "Ensure composables return fresh state unless explicitly intended to share. Use factory functions, avoid global mutable state, and document whether the composable is singleton or instance-based.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "hard"
   }
 ]
