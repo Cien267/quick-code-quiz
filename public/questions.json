@@ -187,5 +187,12 @@
     "answer": "Ensure composables return fresh state unless explicitly intended to share. Use factory functions, avoid global mutable state, and document whether the composable is singleton or instance-based.",
     "tags": ["vue", "architecture"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q28",
+    "question": "What are the trade-offs between using provide/inject vs props/emits?",
+    "answer": "provide/inject avoids prop drilling and is useful for deep trees, but it reduces explicitness and makes debugging harder. props/emits are more explicit and maintainable but can become verbose in large hierarchies.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "medium"
   }
 ]
