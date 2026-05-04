@@ -194,5 +194,12 @@
     "answer": "provide/inject avoids prop drilling and is useful for deep trees, but it reduces explicitness and makes debugging harder. props/emits are more explicit and maintainable but can become verbose in large hierarchies.",
     "tags": ["vue", "architecture"],
     "difficulty": "medium"
+  },
+  {
+    "id": "q29",
+    "question": "How do you prevent unnecessary re-renders in large Vue applications?",
+    "answer": "Use fine-grained reactivity (ref over reactive), split components, apply v-memo or v-once, and ensure computed properties are used instead of methods for derived state.",
+    "tags": ["vue", "performance"],
+    "difficulty": "hard"
   }
 ]
