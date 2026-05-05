@@ -201,5 +201,12 @@
     "answer": "Use fine-grained reactivity (ref over reactive), split components, apply v-memo or v-once, and ensure computed properties are used instead of methods for derived state.",
     "tags": ["vue", "performance"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q30",
+    "question": "How does Vue handle async components and what are the performance implications?",
+    "answer": "Vue loads async components via dynamic import and can wrap them in Suspense. This reduces initial bundle size but introduces loading states and potential hydration issues in SSR.",
+    "tags": ["vue", "performance", "async"],
+    "difficulty": "hard"
   }
 ]
