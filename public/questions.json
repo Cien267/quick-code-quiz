@@ -208,5 +208,12 @@
     "answer": "Vue loads async components via dynamic import and can wrap them in Suspense. This reduces initial bundle size but introduces loading states and potential hydration issues in SSR.",
     "tags": ["vue", "performance", "async"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q31",
+    "question": "What causes hydration mismatch in SSR and how do you debug it?",
+    "answer": "Mismatch occurs when server-rendered HTML differs from client output due to non-deterministic data, async timing, or browser-specific logic. Debug by ensuring deterministic rendering and consistent data.",
+    "tags": ["vue", "ssr"],
+    "difficulty": "hard"
   }
 ]
