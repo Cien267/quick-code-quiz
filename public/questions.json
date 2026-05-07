@@ -215,5 +215,12 @@
     "answer": "Mismatch occurs when server-rendered HTML differs from client output due to non-deterministic data, async timing, or browser-specific logic. Debug by ensuring deterministic rendering and consistent data.",
     "tags": ["vue", "ssr"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q32",
+    "question": "How do you structure a Vue project for long-term scalability?",
+    "answer": "Organize by domain or feature, separate UI and business logic, use composables for reuse, limit global state, and enforce consistent patterns across the codebase.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "hard"
   }
 ]
