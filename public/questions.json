@@ -222,5 +222,12 @@
     "answer": "Organize by domain or feature, separate UI and business logic, use composables for reuse, limit global state, and enforce consistent patterns across the codebase.",
     "tags": ["vue", "architecture"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q33",
+    "question": "What are common memory leak sources in Vue applications?",
+    "answer": "Uncleaned event listeners, timers, watchers, and external library instances can cause leaks. Always clean up in onBeforeUnmount or via onCleanup in watch/watchEffect.",
+    "tags": ["vue", "performance"],
+    "difficulty": "hard"
   }
 ]
