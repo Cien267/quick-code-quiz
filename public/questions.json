@@ -236,5 +236,12 @@
     "answer": "Use composables or libraries to manage form state, validation, and errors. Keep logic separated from UI and ensure performance with debounced validation and minimal reactivity.",
     "tags": ["vue", "architecture"],
     "difficulty": "medium"
+  },
+  {
+    "id": "q35",
+    "question": "How would you implement Clean Architecture and Inversion of Control (IoC) in a large-scale Vue 3 application to fully decouple domain business logic from the UI framework?",
+    "answer": "By leveraging Vue's provide/inject API as a Dependency Injection (DI) container. Domain logic and entities are written in pure TypeScript, entirely agnostic of Vue. These services are instantiated at the application root and injected into components. Composables act as the Adapter/Presenter layer, wrapping pure domain outputs in Vue's reactivity (e.g., shallowRef) and delegating UI actions back to the domain use cases. This ensures the core business rules remain highly testable and independent of the Vue ecosystem.",
+    "tags": ["vue", "architecture", "design-patterns", "ioc"],
+    "difficulty": "hard"
   }
 ]
