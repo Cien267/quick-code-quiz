@@ -229,5 +229,12 @@
     "answer": "Uncleaned event listeners, timers, watchers, and external library instances can cause leaks. Always clean up in onBeforeUnmount or via onCleanup in watch/watchEffect.",
     "tags": ["vue", "performance"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q34",
+    "question": "How do you handle complex forms and validation in large Vue applications?",
+    "answer": "Use composables or libraries to manage form state, validation, and errors. Keep logic separated from UI and ensure performance with debounced validation and minimal reactivity.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "medium"
   }
 ]
