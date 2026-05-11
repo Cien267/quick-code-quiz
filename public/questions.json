@@ -236,5 +236,12 @@
     "answer": "Use composables or libraries to manage form state, validation, and errors. Keep logic separated from UI and ensure performance with debounced validation and minimal reactivity.",
     "tags": ["vue", "architecture"],
     "difficulty": "medium"
+  },
+  {
+    "id": "q35",
+    "question": "What are the risks of overusing reactive and how do you control reactivity scope?",
+    "answer": "Overusing reactive can lead to unnecessary dependency tracking and performance issues. Use ref for fine-grained control and avoid making large objects deeply reactive unless needed.",
+    "tags": ["vue", "reactivity"],
+    "difficulty": "hard"
   }
 ]
