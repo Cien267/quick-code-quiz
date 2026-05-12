@@ -243,5 +243,12 @@
     "answer": "Overusing reactive can lead to unnecessary dependency tracking and performance issues. Use ref for fine-grained control and avoid making large objects deeply reactive unless needed.",
     "tags": ["vue", "reactivity"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q36",
+    "question": "How do you debug a Vue app where state updates but UI does not reflect changes?",
+    "answer": "Check if reactivity is broken (e.g., destructuring reactive objects), ensure correct usage of ref/reactive, verify component re-rendering, and inspect dependencies using Vue Devtools.",
+    "tags": ["vue", "debugging"],
+    "difficulty": "hard"
   }
 ]
