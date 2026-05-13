@@ -250,5 +250,12 @@
     "answer": "Check if reactivity is broken (e.g., destructuring reactive objects), ensure correct usage of ref/reactive, verify component re-rendering, and inspect dependencies using Vue Devtools.",
     "tags": ["vue", "debugging"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q37",
+    "question": "How do you design a caching strategy for API data in Vue?",
+    "answer": "Use composables or state management to cache responses, implement stale-while-revalidate strategies, and avoid redundant requests by sharing cached data across components.",
+    "tags": ["vue", "architecture", "performance"],
+    "difficulty": "hard"
   }
 ]
