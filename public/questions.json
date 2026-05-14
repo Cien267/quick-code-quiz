@@ -257,5 +257,12 @@
     "answer": "Use composables or state management to cache responses, implement stale-while-revalidate strategies, and avoid redundant requests by sharing cached data across components.",
     "tags": ["vue", "architecture", "performance"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q38",
+    "question": "How do you handle permissions and role-based UI rendering in Vue?",
+    "answer": "Centralize permission logic in composables or store, use directives or helper functions, and ensure UI and route-level guards enforce access control consistently.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "medium"
   }
 ]
