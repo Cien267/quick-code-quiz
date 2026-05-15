@@ -264,5 +264,12 @@
     "answer": "Centralize permission logic in composables or store, use directives or helper functions, and ensure UI and route-level guards enforce access control consistently.",
     "tags": ["vue", "architecture"],
     "difficulty": "medium"
+  },
+  {
+    "id": "q39",
+    "question": "What strategies do you use to avoid tight coupling between components?",
+    "answer": "Use props/emits for communication, composables for shared logic, and avoid direct component references. Apply dependency inversion and keep components focused.",
+    "tags": ["vue", "architecture"],
+    "difficulty": "hard"
   }
 ]
