@@ -271,5 +271,12 @@
     "answer": "Use props/emits for communication, composables for shared logic, and avoid direct component references. Apply dependency inversion and keep components focused.",
     "tags": ["vue", "architecture"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q40",
+    "question": "How do you evaluate whether a performance issue is caused by Vue or by business logic?",
+    "answer": "Profile the app using Devtools and browser tools, isolate reactivity updates, and measure render times. If logic-heavy computations dominate, it's likely business logic rather than Vue.",
+    "tags": ["vue", "performance"],
+    "difficulty": "hard"
   }
 ]
