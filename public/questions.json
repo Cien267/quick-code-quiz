@@ -280,7 +280,7 @@
     "difficulty": "hard"
   },
   {
-    "id": "q17",
+    "id": "q41",
     "question": "How do Options API and Composition API handle reactivity differently under the hood, and what are their architectural trade-offs in large-scale applications?",
     "answer": "Options API relies on Vue's internal template compiler to contextually bind 'this' to an options object, which groups code by option type rather than logical concern, leading to fragmented codebase scaling. Composition API leverages explicit JavaScript function execution where reactive states (ref, reactive) are decoupled from the component instance, allowing complex domain logic to be extracted into modular, tree-shakable graph dependencies with precise TypeScript inference.",
     "tags": ["vue", "architecture", "reactivity"],
