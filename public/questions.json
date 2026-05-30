@@ -278,5 +278,12 @@
     "answer": "Profile the app using Devtools and browser tools, isolate reactivity updates, and measure render times. If logic-heavy computations dominate, it's likely business logic rather than Vue.",
     "tags": ["vue", "performance"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q41",
+    "question": "How does Vue's scheduler work internally and how does it batch updates?",
+    "answer": "Vue queues reactive effects and deduplicates them using a job queue. Updates are flushed asynchronously in microtasks, ensuring multiple state changes result in a single render cycle.",
+    "tags": ["vue", "internals", "scheduler"],
+    "difficulty": "hard"
   }
 ]
