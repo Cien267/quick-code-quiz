@@ -292,5 +292,13 @@
     "answer": "Improper use of watch can cause infinite loops, redundant API calls, and performance issues. Avoid this by controlling dependencies, using immediate and flush options carefully, and cleaning up side effects.",
     "tags": ["vue", "reactivity"],
     "difficulty": "hard"
+  },
+  {
+
+    "id": "q43",
+    "question": "How would you design frontend architecture for a multi-tenant SaaS application using Vue?",
+    "answer": "Separate tenant-specific configuration from core logic, support feature flags, isolate permissions and branding, and ensure scalability through modular architecture and shared infrastructure.",
+    "tags": ["vue", "architecture", "saas"],
+    "difficulty": "expert"
   }
 ]
