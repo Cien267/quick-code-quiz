@@ -300,5 +300,12 @@
     "answer": "Separate tenant-specific configuration from core logic, support feature flags, isolate permissions and branding, and ensure scalability through modular architecture and shared infrastructure.",
     "tags": ["vue", "architecture", "saas"],
     "difficulty": "expert"
-  }
+  },
+  {
+    "id": "q44",
+    "question": "How do you measure and improve bundle size in a Vue application?",
+    "answer": "Use bundle analyzers to identify large dependencies, apply tree-shaking, lazy loading, code splitting, and remove unused libraries. Measure before and after changes to validate impact.",
+    "tags": ["vue", "performance", "build"],
+    "difficulty": "hard"
+  },
 ]
