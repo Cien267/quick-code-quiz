@@ -308,4 +308,11 @@
     "tags": ["vue", "performance", "build"],
     "difficulty": "hard"
   },
+  {
+    "id": "q45",
+    "question": "How would you build a plugin system in Vue so that new features can be added without modifying the core application?",
+    "answer": "Design the application around extension points rather than feature-specific code. Use app.use() for plugin registration, provide/inject for dependency injection, dynamic routing, async components, and a well-defined plugin API. Plugins should be loosely coupled, independently testable, and able to register routes, stores, directives, and services without affecting the core application.",
+    "tags": ["vue", "architecture", "plugin-system", "enterprise"],
+    "difficulty": "expert"
+  }
 ]
