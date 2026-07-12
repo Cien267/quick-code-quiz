@@ -314,5 +314,12 @@
     "answer": "Design the application around extension points rather than feature-specific code. Use app.use() for plugin registration, provide/inject for dependency injection, dynamic routing, async components, and a well-defined plugin API. Plugins should be loosely coupled, independently testable, and able to register routes, stores, directives, and services without affecting the core application.",
     "tags": ["vue", "architecture", "plugin-system", "enterprise"],
     "difficulty": "expert"
+  },
+  {
+    "id": "q46",
+    "question": "Imagine a Vue page contains over 10,000 reactive components and users report poor performance. How would you systematically investigate and optimize the application?",
+    "answer": "Start by profiling with Vue Devtools and the browser Performance panel to identify rendering bottlenecks. Measure component render frequency, dependency tracking, and expensive computations. Apply virtualization for large lists, split oversized components, reduce unnecessary reactive dependencies, replace deep watchers with computed values where appropriate, lazy-load heavy modules, memoize stable subtrees using v-memo, and verify improvements with measurable performance metrics before and after each optimization.",
+    "tags": ["vue", "performance", "debugging", "architecture", "enterprise"],
+    "difficulty": "expert"
   }
 ]
