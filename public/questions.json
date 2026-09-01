@@ -330,7 +330,7 @@
   },
   {
     "id": "q48",
-    "question": "A Pinia store has become very large and is used by dozens of components. How would you refactor it without breaking the application?",
+    "question": "A Pinia store has become very large and is used by dozens of components.  How would you refactor it without breaking the application?",
     "answer": "First identify distinct domains and separate server state, UI state, and business logic. Split the store by domain rather than arbitrarily by file size, move reusable business logic into composables or services, and keep the store focused on shared state and state transitions. Migrate incrementally while preserving stable public APIs, adding tests around critical behavior to prevent regressions.",
     "tags": ["vue", "pinia", "architecture", "refactoring"],
     "difficulty": "expert"
