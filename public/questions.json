@@ -294,7 +294,6 @@
     "difficulty": "hard"
   },
   {
-
     "id": "q43",
     "question": "How would you design frontend architecture for a multi-tenant SaaS application using Vue?",
     "answer": "Separate tenant-specific configuration from core logic, support feature flags, isolate permissions and branding, and ensure scalability through modular architecture and shared infrastructure.",
@@ -327,6 +326,13 @@
     "question": "How do you manage side effects and lifecycle logic inside complex composables without causing memory leaks or unexpected behavior?",
     "answer": "Composables should clearly define their lifecycle ownership. Effects created synchronously inside a component's setup scope are automatically disposed when the component unmounts, but external resources such as event listeners, timers, subscriptions, and manually created effects should have explicit cleanup. Use onScopeDispose or watcher cleanup callbacks to encapsulate cleanup logic inside the composable rather than forcing every consumer to manage it.",
     "tags": ["vue", "composables", "lifecycle", "reactivity"],
+    "difficulty": "expert"
+  },
+  {
+    "id": "q48",
+    "question": "A Pinia store has become very large and is used by dozens of components. How would you refactor it without breaking the application?",
+    "answer": "First identify distinct domains and separate server state, UI state, and business logic. Split the store by domain rather than arbitrarily by file size, move reusable business logic into composables or services, and keep the store focused on shared state and state transitions. Migrate incrementally while preserving stable public APIs, adding tests around critical behavior to prevent regressions.",
+    "tags": ["vue", "pinia", "architecture", "refactoring"],
     "difficulty": "expert"
   }
 ]
