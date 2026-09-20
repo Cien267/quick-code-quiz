@@ -341,5 +341,18 @@
     "answer": "Computed is used for derived state and caches its result until its reactive dependencies change. Methods execute whenever they are called and are appropriate for imperative operations or event handlers. Watch is intended for side effects that should happen when specific reactive state changes, such as API calls, persistence, or integration with external systems. In general, use computed for derived values, methods for actions, and watch for side effects.",
     "tags": ["vue", "reactivity", "computed", "watch"],
     "difficulty": "hard"
+  },
+  {
+    "id": "q50",
+    "question": "How would you design communication between deeply nested Vue components without creating excessive prop drilling or hidden dependencies?",
+    "answer": "Choose the communication mechanism based on ownership and scope. Use props and emits for explicit parent-child communication, provide/inject for dependencies shared within a component subtree, composables for reusable behavior, and Pinia for genuinely shared application state. Avoid using global stores or provide/inject merely to bypass a small number of prop levels, because that can make data flow harder to understand and maintain.",
+    "tags": [
+      "vue",
+      "architecture",
+      "component-communication",
+      "provide-inject",
+      "pinia"
+    ],
+    "difficulty": "hard"
   }
 ]
