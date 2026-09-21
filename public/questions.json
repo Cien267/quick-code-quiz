@@ -334,5 +334,12 @@
     "answer": "First identify distinct domains and separate server state, UI state, and business logic. Split the store by domain rather than arbitrarily by file size, move reusable business logic into composables or services, and keep the store focused on shared state and state transitions. Migrate incrementally while preserving stable public APIs, adding tests around critical behavior to prevent regressions.",
     "tags": ["vue", "pinia", "architecture", "refactoring"],
     "difficulty": "expert"
+  },
+  {
+    "id": "q49",
+    "question": "What are the differences between computed, methods, and watch in Vue, and how would you choose between them in a complex component?",
+    "answer": "Computed is used for derived state and caches its result until its reactive dependencies change. Methods execute whenever they are called and are appropriate for imperative operations or event handlers. Watch is intended for side effects that should happen when specific reactive state changes, such as API calls, persistence, or integration with external systems. In general, use computed for derived values, methods for actions, and watch for side effects.",
+    "tags": ["vue", "reactivity", "computed", "watch"],
+    "difficulty": "hard"
   }
 ]
