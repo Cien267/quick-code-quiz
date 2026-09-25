@@ -354,5 +354,12 @@
       "pinia"
     ],
     "difficulty": "hard"
-  }
+  },
+  {
+  "id": "q51",
+  "question": "Trong Vue 3, patch flags và block tree là gì, và chúng giúp tối ưu quá trình rendering như thế nào?",
+  "answer": "Patch flags là các metadata được Vue compiler gắn vào VNode để runtime biết chính xác phần nào của một node có khả năng thay đổi, ví dụ chỉ dynamic text, class, style hoặc props. Block tree là cơ chế nhóm các dynamic VNode trong một block để Vue có thể theo dõi và chỉ duyệt qua những node thực sự cần cập nhật thay vì diff toàn bộ cây VDOM. Khi template được compile, Vue có thể kết hợp static hoisting, patch flags và block tree để giảm đáng kể công việc diff/patch trong runtime. Đây là một trong những lý do Vue 3 có hiệu năng rendering tốt hơn so với việc thực hiện diff VDOM một cách tổng quát cho toàn bộ component.",
+  "tags": ["vue", "rendering", "vdom", "compiler", "patch-flags", "block-tree", "performance"],
+  "difficulty": "expert"
+}
 ]
