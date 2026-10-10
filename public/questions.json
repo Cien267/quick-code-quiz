@@ -368,5 +368,12 @@
   "answer": "effectScope là cơ chế cho phép nhóm nhiều reactive effects, chẳng hạn như watch, watchEffect và computed, vào cùng một phạm vi quản lý. Khi gọi scope.stop(), Vue sẽ dừng các effects thuộc phạm vi đó, giúp tránh memory leak và các side effect tiếp tục chạy sau khi không còn cần thiết. Mặc định, các effects được tạo đồng bộ trong setup() hoặc trong một effect scope đang hoạt động sẽ được gắn với scope tương ứng để tự động quản lý vòng đời. Với các composable phức tạp, effectScope đặc biệt hữu ích khi một composable cần tạo và hủy nhiều watchers cùng lúc, thay vì phải quản lý từng watcher riêng lẻ. Ngoài ra, detached effect scope (effectScope(true)) không tự động liên kết với scope cha, do đó cần chủ động gọi stop() để giải phóng tài nguyên. Tuy nhiên, effectScope không tự động dọn dẹp mọi side effect bên ngoài hệ thống reactivity, chẳng hạn như event listener, timer hoặc WebSocket. Những tài nguyên này vẫn cần được giải phóng thủ công, thường thông qua onScopeDispose().",
   "tags": ["vue", "reactivity", "effect-scope", "composables", "lifecycle", "memory-leak"],
   "difficulty": "expert"
+},
+  {
+  "id": "q53",
+  "question": "Trong Vue 3, khi sử dụng watch để gọi API dựa trên reactive state, làm thế nào để xử lý race condition khi nhiều request được gửi liên tiếp và phản hồi về không đúng thứ tự?",
+  "answer": "Race condition xảy ra khi nhiều request được gửi liên tiếp nhưng request cũ hoàn thành sau request mới, khiến dữ liệu lỗi thời ghi đè kết quả mới nhất. Có thể xử lý bằng cách sử dụng callback cleanup của watch để hủy request trước đó bằng AbortController. Trong callback của watch, tạo AbortController mới, truyền signal vào fetch và đăng ký cleanup để abort request khi watcher chạy lại hoặc bị dừng. Nếu API client không hỗ trợ cancellation, có thể dùng request ID hoặc sequence counter để chỉ chấp nhận kết quả từ request mới nhất. Cần lưu ý rằng hủy request không phải lúc nào cũng đảm bảo tác vụ phía server bị hủy; vì vậy, với các thao tác ghi dữ liệu quan trọng, vẫn cần cơ chế đảm bảo tính nhất quán ở phía backend. Trong Vue 3.5+, có thể dùng onWatcherCleanup(), nhưng hàm này phải được gọi đồng bộ trước await; callback cleanup truyền trực tiếp vào watch cũng là một lựa chọn tương thích với các phiên bản Vue 3 trước đó.",
+  "tags": ["vue", "watch", "async", "race-condition", "abort-controller", "api"],
+  "difficulty": "expert"
 }
 ]
