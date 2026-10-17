@@ -375,5 +375,12 @@
   "answer": "Race condition xảy ra khi nhiều request được gửi liên tiếp nhưng request cũ hoàn thành sau request mới, khiến dữ liệu lỗi thời ghi đè kết quả mới nhất. Có thể xử lý bằng cách sử dụng callback cleanup của watch để hủy request trước đó bằng AbortController. Trong callback của watch, tạo AbortController mới, truyền signal vào fetch và đăng ký cleanup để abort request khi watcher chạy lại hoặc bị dừng. Nếu API client không hỗ trợ cancellation, có thể dùng request ID hoặc sequence counter để chỉ chấp nhận kết quả từ request mới nhất. Cần lưu ý rằng hủy request không phải lúc nào cũng đảm bảo tác vụ phía server bị hủy; vì vậy, với các thao tác ghi dữ liệu quan trọng, vẫn cần cơ chế đảm bảo tính nhất quán ở phía backend. Trong Vue 3.5+, có thể dùng onWatcherCleanup(), nhưng hàm này phải được gọi đồng bộ trước await; callback cleanup truyền trực tiếp vào watch cũng là một lựa chọn tương thích với các phiên bản Vue 3 trước đó.",
   "tags": ["vue", "watch", "async", "race-condition", "abort-controller", "api"],
   "difficulty": "expert"
-}
+},
+{
+    "id": "q54",
+    "question": "Trong Vue 3, sự khác biệt giữa flush: 'pre', flush: 'post' và flush: 'sync' trong watch là gì? Khi nào việc chọn sai flush timing có thể gây ra bug hoặc ảnh hưởng hiệu năng?",
+    "answer": "flush quyết định thời điểm watcher chạy tương đối với quá trình cập nhật component. Mặc định, flush: 'pre' khiến watcher chạy sau khi state thay đổi nhưng trước khi DOM của component sở hữu watcher được cập nhật; DOM của component cha có thể đã được cập nhật trước đó. flush: 'post' khiến watcher chạy sau khi DOM của component sở hữu watcher đã được cập nhật, phù hợp khi cần đo kích thước phần tử, truy cập DOM mới hoặc đồng bộ với thư viện giao diện bên ngoài. flush: 'sync' khiến watcher chạy ngay khi reactive dependency thay đổi, không được batch như các watcher thông thường, nên có thể chạy nhiều lần liên tiếp khi cập nhật một mảng hoặc nhiều state và gây giảm hiệu năng. Ví dụ, nếu cần đọc DOM sau khi Vue render, dùng flush: 'post' hoặc kết hợp watcher mặc định với nextTick(). Không nên dùng flush: 'sync' cho các thay đổi có tần suất cao nếu không thực sự cần phản ứng đồng bộ. Cần phân biệt flush timing của watcher với thời điểm DOM được cập nhật hoàn tất trên toàn ứng dụng: flush: 'post' gắn với chu kỳ cập nhật của component liên quan, còn nextTick() có thể dùng để chờ đợt cập nhật DOM đang được Vue lên lịch hoàn tất.",
+    "tags": ["vue", "watch", "scheduler", "flush-timing", "next-tick", "performance"],
+    "difficulty": "expert"
+  }
 ]
