@@ -389,5 +389,13 @@
     "answer": "Trong môi trường SSR, module thường được nạp và tái sử dụng giữa nhiều request. Nếu khai báo reactive state dùng chung ở phạm vi module, chẳng hạn const user = ref(null), các request có thể vô tình dùng chung một đối tượng state. Điều này có thể làm dữ liệu của người dùng này xuất hiện trong HTML được render cho người dùng khác, gây lỗi logic và rủi ro bảo mật. Với state phụ thuộc request hoặc người dùng, nên tạo state bên trong factory hoặc composable được khởi tạo theo từng ứng dụng/request, thay vì dùng singleton ở phạm vi module. Với Pinia, cần tạo một Pinia instance riêng cho mỗi SSR request và đảm bảo server renderer sử dụng đúng instance đó khi gọi useStore(). Không được dùng một Pinia instance toàn cục chung cho tất cả request trên server. Đồng thời, cần serialize và hydrate state an toàn, tránh đưa secret hoặc dữ liệu nhạy cảm vào payload gửi xuống client. State thực sự bất biến và không chứa dữ liệu theo request có thể được chia sẻ ở phạm vi module, nhưng mọi state có khả năng phụ thuộc người dùng hoặc request phải được quản lý theo đúng vòng đời.",
     "tags": ["vue", "ssr", "pinia", "composables", "state-management", "security", "hydration"],
     "difficulty": "expert"
-  }
+  },
+  {
+  "id": "q56",
+  "question": "Trong Vue 3, khi nào nên sử dụng shallowRef kết hợp với triggerRef thay vì ref hoặc reactive? Những trade-off về hiệu năng và tính đúng đắn của reactivity cần được cân nhắc như thế nào?",
+  "answer": "shallowRef chỉ theo dõi reactive ở cấp độ .value, không tự động chuyển đổi sâu object bên trong thành reactive. Vì vậy, nó phù hợp khi quản lý các cấu trúc dữ liệu lớn, dữ liệu bất biến được thay thế theo từng phiên bản, hoặc instance từ thư viện bên ngoài mà Vue không cần theo dõi từng thuộc tính. Với shallowRef, thay đổi thuộc tính lồng nhau như state.value.user.name sẽ không tự kích hoạt cập nhật component. Có thể thay toàn bộ object bằng cách gán state.value = newValue để kích hoạt reactivity. Nếu cần giữ nguyên object và chỉ muốn thông báo rằng giá trị bên trong đã thay đổi, có thể gọi triggerRef(state) sau khi mutation. Tuy nhiên, triggerRef buộc các effect phụ thuộc trực tiếp vào shallowRef chạy lại, nên việc lạm dụng nó có thể khiến luồng cập nhật khó dự đoán. Khi dữ liệu cần phản ứng chi tiết theo từng thuộc tính, ref hoặc reactive thường phù hợp hơn. Quyết định nên dựa trên mô hình cập nhật dữ liệu và kết quả profiling thực tế, không chỉ dựa trên giả định rằng shallowRef luôn nhanh hơn.",
+  "tags": ["vue", "reactivity", "shallow-ref", "trigger-ref", "performance", "immutable-state"],
+  "difficulty": "expert"
+}
+  
 ]
