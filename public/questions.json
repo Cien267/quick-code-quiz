@@ -396,6 +396,12 @@
   "answer": "shallowRef chỉ theo dõi reactive ở cấp độ .value, không tự động chuyển đổi sâu object bên trong thành reactive. Vì vậy, nó phù hợp khi quản lý các cấu trúc dữ liệu lớn, dữ liệu bất biến được thay thế theo từng phiên bản, hoặc instance từ thư viện bên ngoài mà Vue không cần theo dõi từng thuộc tính. Với shallowRef, thay đổi thuộc tính lồng nhau như state.value.user.name sẽ không tự kích hoạt cập nhật component. Có thể thay toàn bộ object bằng cách gán state.value = newValue để kích hoạt reactivity. Nếu cần giữ nguyên object và chỉ muốn thông báo rằng giá trị bên trong đã thay đổi, có thể gọi triggerRef(state) sau khi mutation. Tuy nhiên, triggerRef buộc các effect phụ thuộc trực tiếp vào shallowRef chạy lại, nên việc lạm dụng nó có thể khiến luồng cập nhật khó dự đoán. Khi dữ liệu cần phản ứng chi tiết theo từng thuộc tính, ref hoặc reactive thường phù hợp hơn. Quyết định nên dựa trên mô hình cập nhật dữ liệu và kết quả profiling thực tế, không chỉ dựa trên giả định rằng shallowRef luôn nhanh hơn.",
   "tags": ["vue", "reactivity", "shallow-ref", "trigger-ref", "performance", "immutable-state"],
   "difficulty": "expert"
+},
+  {
+  "id": "q57",
+  "question": "Trong Vue 3, tại sao việc destructure một reactive object có thể làm mất reactivity, và bạn sẽ thiết kế API cho composable như thế nào để người dùng có thể destructure dữ liệu mà vẫn giữ được reactivity?",
+  "answer": "Khi destructure một thuộc tính nguyên thủy từ reactive object, ví dụ const { count } = state, biến count nhận giá trị hiện tại chứ không còn truy cập thông qua Proxy của state. Vì vậy, việc thay đổi state.count không cập nhật biến count đã destructure. Với thuộc tính là object lồng nhau, tham chiếu đến object đó vẫn có thể giữ reactivity, nhưng việc gán lại thuộc tính trên object cha không làm biến đã destructure tự cập nhật theo. Có thể sử dụng toRef(state, 'count') để tạo một ref liên kết với thuộc tính gốc, hoặc toRefs(state) để chuyển các thuộc tính hiện có thành refs trước khi destructure. Khi thiết kế composable, nên trả về một object chứa refs hoặc dùng reactive object với hướng dẫn rõ ràng về cách sử dụng; nếu muốn hỗ trợ destructuring nhất quán, có thể trả về các refs riêng lẻ hoặc object được tạo bằng toRefs(). Cần lưu ý toRefs() chỉ tạo refs cho các thuộc tính tồn tại tại thời điểm gọi; với thuộc tính có thể được thêm sau đó, toRef(object, key) có thể phù hợp hơn. Ngoài ra, ref trả về cần được truy cập bằng .value trong JavaScript, dù template có cơ chế tự unwrap trong nhiều trường hợp.",
+  "tags": ["vue", "reactivity", "reactive", "toRef", "toRefs", "composables", "api-design"],
+  "difficulty": "expert"
 }
-  
 ]
