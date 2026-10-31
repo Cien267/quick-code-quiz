@@ -356,52 +356,104 @@
     "difficulty": "hard"
   },
   {
-  "id": "q51",
-  "question": "Trong Vue 3, patch flags và block tree là gì, và chúng giúp tối ưu quá trình rendering như thế nào?",
-  "answer": "Patch flags là các metadata được Vue compiler gắn vào VNode để runtime biết chính xác phần nào của một node có khả năng thay đổi, ví dụ chỉ dynamic text, class, style hoặc props. Block tree là cơ chế nhóm các dynamic VNode trong một block để Vue có thể theo dõi và chỉ duyệt qua những node thực sự cần cập nhật thay vì diff toàn bộ cây VDOM. Khi template được compile, Vue có thể kết hợp static hoisting, patch flags và block tree để giảm đáng kể công việc diff/patch trong runtime. Đây là một trong những lý do Vue 3 có hiệu năng rendering tốt hơn so với việc thực hiện diff VDOM một cách tổng quát cho toàn bộ component.",
-  "tags": ["vue", "rendering", "vdom", "compiler", "patch-flags", "block-tree", "performance"],
-  "difficulty": "expert"
-},
+    "id": "q51",
+    "question": "Trong Vue 3, patch flags và block tree là gì, và chúng giúp tối ưu quá trình rendering như thế nào?",
+    "answer": "Patch flags là các metadata được Vue compiler gắn vào VNode để runtime biết chính xác phần nào của một node có khả năng thay đổi, ví dụ chỉ dynamic text, class, style hoặc props. Block tree là cơ chế nhóm các dynamic VNode trong một block để Vue có thể theo dõi và chỉ duyệt qua những node thực sự cần cập nhật thay vì diff toàn bộ cây VDOM. Khi template được compile, Vue có thể kết hợp static hoisting, patch flags và block tree để giảm đáng kể công việc diff/patch trong runtime. Đây là một trong những lý do Vue 3 có hiệu năng rendering tốt hơn so với việc thực hiện diff VDOM một cách tổng quát cho toàn bộ component.",
+    "tags": [
+      "vue",
+      "rendering",
+      "vdom",
+      "compiler",
+      "patch-flags",
+      "block-tree",
+      "performance"
+    ],
+    "difficulty": "expert"
+  },
   {
-  "id": "q52",
-  "question": "Trong Vue 3, effectScope là gì? Nó giải quyết vấn đề gì khi xây dựng các composable phức tạp và quản lý vòng đời của reactive effects?",
-  "answer": "effectScope là cơ chế cho phép nhóm nhiều reactive effects, chẳng hạn như watch, watchEffect và computed, vào cùng một phạm vi quản lý. Khi gọi scope.stop(), Vue sẽ dừng các effects thuộc phạm vi đó, giúp tránh memory leak và các side effect tiếp tục chạy sau khi không còn cần thiết. Mặc định, các effects được tạo đồng bộ trong setup() hoặc trong một effect scope đang hoạt động sẽ được gắn với scope tương ứng để tự động quản lý vòng đời. Với các composable phức tạp, effectScope đặc biệt hữu ích khi một composable cần tạo và hủy nhiều watchers cùng lúc, thay vì phải quản lý từng watcher riêng lẻ. Ngoài ra, detached effect scope (effectScope(true)) không tự động liên kết với scope cha, do đó cần chủ động gọi stop() để giải phóng tài nguyên. Tuy nhiên, effectScope không tự động dọn dẹp mọi side effect bên ngoài hệ thống reactivity, chẳng hạn như event listener, timer hoặc WebSocket. Những tài nguyên này vẫn cần được giải phóng thủ công, thường thông qua onScopeDispose().",
-  "tags": ["vue", "reactivity", "effect-scope", "composables", "lifecycle", "memory-leak"],
-  "difficulty": "expert"
-},
+    "id": "q52",
+    "question": "Trong Vue 3, effectScope là gì? Nó giải quyết vấn đề gì khi xây dựng các composable phức tạp và quản lý vòng đời của reactive effects?",
+    "answer": "effectScope là cơ chế cho phép nhóm nhiều reactive effects, chẳng hạn như watch, watchEffect và computed, vào cùng một phạm vi quản lý. Khi gọi scope.stop(), Vue sẽ dừng các effects thuộc phạm vi đó, giúp tránh memory leak và các side effect tiếp tục chạy sau khi không còn cần thiết. Mặc định, các effects được tạo đồng bộ trong setup() hoặc trong một effect scope đang hoạt động sẽ được gắn với scope tương ứng để tự động quản lý vòng đời. Với các composable phức tạp, effectScope đặc biệt hữu ích khi một composable cần tạo và hủy nhiều watchers cùng lúc, thay vì phải quản lý từng watcher riêng lẻ. Ngoài ra, detached effect scope (effectScope(true)) không tự động liên kết với scope cha, do đó cần chủ động gọi stop() để giải phóng tài nguyên. Tuy nhiên, effectScope không tự động dọn dẹp mọi side effect bên ngoài hệ thống reactivity, chẳng hạn như event listener, timer hoặc WebSocket. Những tài nguyên này vẫn cần được giải phóng thủ công, thường thông qua onScopeDispose().",
+    "tags": [
+      "vue",
+      "reactivity",
+      "effect-scope",
+      "composables",
+      "lifecycle",
+      "memory-leak"
+    ],
+    "difficulty": "expert"
+  },
   {
-  "id": "q53",
-  "question": "Trong Vue 3, khi sử dụng watch để gọi API dựa trên reactive state, làm thế nào để xử lý race condition khi nhiều request được gửi liên tiếp và phản hồi về không đúng thứ tự?",
-  "answer": "Race condition xảy ra khi nhiều request được gửi liên tiếp nhưng request cũ hoàn thành sau request mới, khiến dữ liệu lỗi thời ghi đè kết quả mới nhất. Có thể xử lý bằng cách sử dụng callback cleanup của watch để hủy request trước đó bằng AbortController. Trong callback của watch, tạo AbortController mới, truyền signal vào fetch và đăng ký cleanup để abort request khi watcher chạy lại hoặc bị dừng. Nếu API client không hỗ trợ cancellation, có thể dùng request ID hoặc sequence counter để chỉ chấp nhận kết quả từ request mới nhất. Cần lưu ý rằng hủy request không phải lúc nào cũng đảm bảo tác vụ phía server bị hủy; vì vậy, với các thao tác ghi dữ liệu quan trọng, vẫn cần cơ chế đảm bảo tính nhất quán ở phía backend. Trong Vue 3.5+, có thể dùng onWatcherCleanup(), nhưng hàm này phải được gọi đồng bộ trước await; callback cleanup truyền trực tiếp vào watch cũng là một lựa chọn tương thích với các phiên bản Vue 3 trước đó.",
-  "tags": ["vue", "watch", "async", "race-condition", "abort-controller", "api"],
-  "difficulty": "expert"
-},
-{
+    "id": "q53",
+    "question": "Trong Vue 3, khi sử dụng watch để gọi API dựa trên reactive state, làm thế nào để xử lý race condition khi nhiều request được gửi liên tiếp và phản hồi về không đúng thứ tự?",
+    "answer": "Race condition xảy ra khi nhiều request được gửi liên tiếp nhưng request cũ hoàn thành sau request mới, khiến dữ liệu lỗi thời ghi đè kết quả mới nhất. Có thể xử lý bằng cách sử dụng callback cleanup của watch để hủy request trước đó bằng AbortController. Trong callback của watch, tạo AbortController mới, truyền signal vào fetch và đăng ký cleanup để abort request khi watcher chạy lại hoặc bị dừng. Nếu API client không hỗ trợ cancellation, có thể dùng request ID hoặc sequence counter để chỉ chấp nhận kết quả từ request mới nhất. Cần lưu ý rằng hủy request không phải lúc nào cũng đảm bảo tác vụ phía server bị hủy; vì vậy, với các thao tác ghi dữ liệu quan trọng, vẫn cần cơ chế đảm bảo tính nhất quán ở phía backend. Trong Vue 3.5+, có thể dùng onWatcherCleanup(), nhưng hàm này phải được gọi đồng bộ trước await; callback cleanup truyền trực tiếp vào watch cũng là một lựa chọn tương thích với các phiên bản Vue 3 trước đó.",
+    "tags": [
+      "vue",
+      "watch",
+      "async",
+      "race-condition",
+      "abort-controller",
+      "api"
+    ],
+    "difficulty": "expert"
+  },
+  {
     "id": "q54",
     "question": "Trong Vue 3, sự khác biệt giữa flush: 'pre', flush: 'post' và flush: 'sync' trong watch là gì? Khi nào việc chọn sai flush timing có thể gây ra bug hoặc ảnh hưởng hiệu năng?",
     "answer": "flush quyết định thời điểm watcher chạy tương đối với quá trình cập nhật component. Mặc định, flush: 'pre' khiến watcher chạy sau khi state thay đổi nhưng trước khi DOM của component sở hữu watcher được cập nhật; DOM của component cha có thể đã được cập nhật trước đó. flush: 'post' khiến watcher chạy sau khi DOM của component sở hữu watcher đã được cập nhật, phù hợp khi cần đo kích thước phần tử, truy cập DOM mới hoặc đồng bộ với thư viện giao diện bên ngoài. flush: 'sync' khiến watcher chạy ngay khi reactive dependency thay đổi, không được batch như các watcher thông thường, nên có thể chạy nhiều lần liên tiếp khi cập nhật một mảng hoặc nhiều state và gây giảm hiệu năng. Ví dụ, nếu cần đọc DOM sau khi Vue render, dùng flush: 'post' hoặc kết hợp watcher mặc định với nextTick(). Không nên dùng flush: 'sync' cho các thay đổi có tần suất cao nếu không thực sự cần phản ứng đồng bộ. Cần phân biệt flush timing của watcher với thời điểm DOM được cập nhật hoàn tất trên toàn ứng dụng: flush: 'post' gắn với chu kỳ cập nhật của component liên quan, còn nextTick() có thể dùng để chờ đợt cập nhật DOM đang được Vue lên lịch hoàn tất.",
-    "tags": ["vue", "watch", "scheduler", "flush-timing", "next-tick", "performance"],
+    "tags": [
+      "vue",
+      "watch",
+      "scheduler",
+      "flush-timing",
+      "next-tick",
+      "performance"
+    ],
     "difficulty": "expert"
   },
   {
     "id": "q55",
     "question": "Khi xây dựng ứng dụng Vue 3 có SSR, tại sao việc khai báo reactive state dùng chung ở phạm vi module có thể gây rò rỉ dữ liệu giữa các request? Bạn sẽ thiết kế composable và Pinia store như thế nào để tránh vấn đề này?",
     "answer": "Trong môi trường SSR, module thường được nạp và tái sử dụng giữa nhiều request. Nếu khai báo reactive state dùng chung ở phạm vi module, chẳng hạn const user = ref(null), các request có thể vô tình dùng chung một đối tượng state. Điều này có thể làm dữ liệu của người dùng này xuất hiện trong HTML được render cho người dùng khác, gây lỗi logic và rủi ro bảo mật. Với state phụ thuộc request hoặc người dùng, nên tạo state bên trong factory hoặc composable được khởi tạo theo từng ứng dụng/request, thay vì dùng singleton ở phạm vi module. Với Pinia, cần tạo một Pinia instance riêng cho mỗi SSR request và đảm bảo server renderer sử dụng đúng instance đó khi gọi useStore(). Không được dùng một Pinia instance toàn cục chung cho tất cả request trên server. Đồng thời, cần serialize và hydrate state an toàn, tránh đưa secret hoặc dữ liệu nhạy cảm vào payload gửi xuống client. State thực sự bất biến và không chứa dữ liệu theo request có thể được chia sẻ ở phạm vi module, nhưng mọi state có khả năng phụ thuộc người dùng hoặc request phải được quản lý theo đúng vòng đời.",
-    "tags": ["vue", "ssr", "pinia", "composables", "state-management", "security", "hydration"],
+    "tags": [
+      "vue",
+      "ssr",
+      "pinia",
+      "composables",
+      "state-management",
+      "security",
+      "hydration"
+    ],
     "difficulty": "expert"
   },
   {
-  "id": "q56",
-  "question": "Trong Vue 3, khi nào nên sử dụng shallowRef kết hợp với triggerRef thay vì ref hoặc reactive? Những trade-off về hiệu năng và tính đúng đắn của reactivity cần được cân nhắc như thế nào?",
-  "answer": "shallowRef chỉ theo dõi reactive ở cấp độ .value, không tự động chuyển đổi sâu object bên trong thành reactive. Vì vậy, nó phù hợp khi quản lý các cấu trúc dữ liệu lớn, dữ liệu bất biến được thay thế theo từng phiên bản, hoặc instance từ thư viện bên ngoài mà Vue không cần theo dõi từng thuộc tính. Với shallowRef, thay đổi thuộc tính lồng nhau như state.value.user.name sẽ không tự kích hoạt cập nhật component. Có thể thay toàn bộ object bằng cách gán state.value = newValue để kích hoạt reactivity. Nếu cần giữ nguyên object và chỉ muốn thông báo rằng giá trị bên trong đã thay đổi, có thể gọi triggerRef(state) sau khi mutation. Tuy nhiên, triggerRef buộc các effect phụ thuộc trực tiếp vào shallowRef chạy lại, nên việc lạm dụng nó có thể khiến luồng cập nhật khó dự đoán. Khi dữ liệu cần phản ứng chi tiết theo từng thuộc tính, ref hoặc reactive thường phù hợp hơn. Quyết định nên dựa trên mô hình cập nhật dữ liệu và kết quả profiling thực tế, không chỉ dựa trên giả định rằng shallowRef luôn nhanh hơn.",
-  "tags": ["vue", "reactivity", "shallow-ref", "trigger-ref", "performance", "immutable-state"],
-  "difficulty": "expert"
-},
+    "id": "q56",
+    "question": "Trong Vue 3, khi nào nên sử dụng shallowRef kết hợp với triggerRef thay vì ref hoặc reactive? Những trade-off về hiệu năng và tính đúng đắn của reactivity cần được cân nhắc như thế nào?",
+    "answer": "shallowRef chỉ theo dõi reactive ở cấp độ .value, không tự động chuyển đổi sâu object bên trong thành reactive. Vì vậy, nó phù hợp khi quản lý các cấu trúc dữ liệu lớn, dữ liệu bất biến được thay thế theo từng phiên bản, hoặc instance từ thư viện bên ngoài mà Vue không cần theo dõi từng thuộc tính. Với shallowRef, thay đổi thuộc tính lồng nhau như state.value.user.name sẽ không tự kích hoạt cập nhật component. Có thể thay toàn bộ object bằng cách gán state.value = newValue để kích hoạt reactivity. Nếu cần giữ nguyên object và chỉ muốn thông báo rằng giá trị bên trong đã thay đổi, có thể gọi triggerRef(state) sau khi mutation. Tuy nhiên, triggerRef buộc các effect phụ thuộc trực tiếp vào shallowRef chạy lại, nên việc lạm dụng nó có thể khiến luồng cập nhật khó dự đoán. Khi dữ liệu cần phản ứng chi tiết theo từng thuộc tính, ref hoặc reactive thường phù hợp hơn. Quyết định nên dựa trên mô hình cập nhật dữ liệu và kết quả profiling thực tế, không chỉ dựa trên giả định rằng shallowRef luôn nhanh hơn.",
+    "tags": [
+      "vue",
+      "reactivity",
+      "shallow-ref",
+      "trigger-ref",
+      "performance",
+      "immutable-state"
+    ],
+    "difficulty": "expert"
+  },
   {
-  "id": "q57",
-  "question": "Trong Vue 3, tại sao việc destructure một reactive object có thể làm mất reactivity, và bạn sẽ thiết kế API cho composable như thế nào để người dùng có thể destructure dữ liệu mà vẫn giữ được reactivity?",
-  "answer": "Khi destructure một thuộc tính nguyên thủy từ reactive object, ví dụ const { count } = state, biến count nhận giá trị hiện tại chứ không còn truy cập thông qua Proxy của state. Vì vậy, việc thay đổi state.count không cập nhật biến count đã destructure. Với thuộc tính là object lồng nhau, tham chiếu đến object đó vẫn có thể giữ reactivity, nhưng việc gán lại thuộc tính trên object cha không làm biến đã destructure tự cập nhật theo. Có thể sử dụng toRef(state, 'count') để tạo một ref liên kết với thuộc tính gốc, hoặc toRefs(state) để chuyển các thuộc tính hiện có thành refs trước khi destructure. Khi thiết kế composable, nên trả về một object chứa refs hoặc dùng reactive object với hướng dẫn rõ ràng về cách sử dụng; nếu muốn hỗ trợ destructuring nhất quán, có thể trả về các refs riêng lẻ hoặc object được tạo bằng toRefs(). Cần lưu ý toRefs() chỉ tạo refs cho các thuộc tính tồn tại tại thời điểm gọi; với thuộc tính có thể được thêm sau đó, toRef(object, key) có thể phù hợp hơn. Ngoài ra, ref trả về cần được truy cập bằng .value trong JavaScript, dù template có cơ chế tự unwrap trong nhiều trường hợp.",
-  "tags": ["vue", "reactivity", "reactive", "toRef", "toRefs", "composables", "api-design"],
-  "difficulty": "expert"
-}
+    "id": "q57",
+    "question": "Trong Vue 3, tại sao việc destructure một reactive object có thể làm mất reactivity, và bạn sẽ thiết kế API cho composable như thế nào để người dùng có thể destructure dữ liệu mà vẫn giữ được reactivity?",
+    "answer": "Khi destructure một thuộc tính nguyên thủy từ reactive object, ví dụ const { count } = state, biến count nhận giá trị hiện tại chứ không còn truy cập thông qua Proxy của state. Vì vậy, việc thay đổi state.count không cập nhật biến count đã destructure. Với thuộc tính là object lồng nhau, tham chiếu đến object đó vẫn có thể giữ reactivity, nhưng việc gán lại thuộc tính trên object cha không làm biến đã destructure tự cập nhật theo. Có thể sử dụng toRef(state, 'count') để tạo một ref liên kết với thuộc tính gốc, hoặc toRefs(state) để chuyển các thuộc tính hiện có thành refs trước khi destructure. Khi thiết kế composable, nên trả về một object chứa refs hoặc dùng reactive object với hướng dẫn rõ ràng về cách sử dụng; nếu muốn hỗ trợ destructuring nhất quán, có thể trả về các refs riêng lẻ hoặc object được tạo bằng toRefs(). Cần lưu ý toRefs() chỉ tạo refs cho các thuộc tính tồn tại tại thời điểm gọi; với thuộc tính có thể được thêm sau đó, toRef(object, key) có thể phù hợp hơn. Ngoài ra, ref trả về cần được truy cập bằng .value trong JavaScript, dù template có cơ chế tự unwrap trong nhiều trường hợp.",
+    "tags": [
+      "vue",
+      "reactivity",
+      "reactive",
+      "toRef",
+      "toRefs",
+      "composables",
+      "api-design"
+    ],
+    "difficulty": "expert"
+  }
 ]
