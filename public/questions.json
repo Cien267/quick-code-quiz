@@ -455,5 +455,19 @@
       "api-design"
     ],
     "difficulty": "expert"
+  },
+  {
+    "id": "q58",
+    "question": "Trong Vue 3, sự khác biệt giữa computed thông thường và writable computed là gì? Trong những tình huống nào writable computed có thể gây ra side effect hoặc tạo ra luồng dữ liệu khó kiểm soát?",
+    "answer": "Computed thông thường là một readonly ref chứa giá trị được tính toán từ các reactive dependencies và chỉ được tính lại khi dependencies thay đổi. Writable computed sử dụng get và set để cho phép đọc giá trị dẫn xuất và định nghĩa cách xử lý khi có thao tác ghi vào nó. Ví dụ, có thể tạo một computed kết hợp firstName và lastName, trong đó getter trả về fullName và setter phân tách giá trị được gán để cập nhật hai state gốc. Writable computed hữu ích khi cần tạo một abstraction hai chiều cho dữ liệu dẫn xuất, đặc biệt trong các component form hoặc khi tích hợp với v-model. Tuy nhiên, setter không nên chứa các side effect phức tạp như gọi API, điều hướng hoặc thực hiện nhiều thao tác nghiệp vụ không liên quan, vì điều này khiến hành vi của computed khó dự đoán. Nên giữ getter thuần và setter có trách nhiệm cập nhật state nguồn một cách rõ ràng. Nếu cần xử lý side effect khi giá trị thay đổi, nên sử dụng watch hoặc watchEffect riêng biệt. Cũng cần lưu ý computed không phải cơ chế đồng bộ state hai chiều tự động; writable computed chỉ thực hiện đúng logic mà setter được định nghĩa.",
+    "tags": [
+      "vue",
+      "computed",
+      "writable-computed",
+      "reactivity",
+      "v-model",
+      "side-effects"
+    ],
+    "difficulty": "expert"
   }
 ]
