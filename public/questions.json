@@ -469,5 +469,20 @@
       "side-effects"
     ],
     "difficulty": "expert"
+  },
+  {
+    "id": "q59",
+    "question": "Trong Vue 3, khi nào nên sử dụng customRef để tự định nghĩa cơ chế tracking và triggering? Hãy phân tích cách triển khai một debounced ref và những rủi ro khi thiết kế customRef.",
+    "answer": "customRef cho phép kiểm soát thủ công thời điểm Vue track dependency và trigger các effect phụ thuộc vào ref. Nó nhận một factory với hai hàm track và trigger, sau đó trả về object chứa get và set. Một ứng dụng phổ biến là tạo debounced ref: trong setter, lưu giá trị mới và reset timer; chỉ gọi trigger sau khi khoảng thời gian debounce kết thúc. Trong getter, gọi track để đăng ký dependency và trả về giá trị hiện tại. Cách này hữu ích khi muốn đóng gói hành vi debounce hoặc tích hợp một nguồn dữ liệu có cơ chế cập nhật đặc biệt vào hệ thống reactivity. Tuy nhiên, cần quản lý timer và cleanup cẩn thận để tránh callback chạy sau khi component đã unmount hoặc ref không còn được sử dụng. Ngoài ra, phải đảm bảo track được gọi khi đọc giá trị và trigger được gọi khi cần thông báo thay đổi; nếu gọi sai thời điểm, UI có thể không cập nhật hoặc cập nhật không nhất quán. Một lưu ý quan trọng là không nên tạo object mới mỗi lần getter chạy nếu object đó được truyền xuống child component, vì có thể tạo ra sự khác biệt identity không cần thiết và khiến child component cập nhật ngoài dự kiến. Chỉ nên dùng customRef khi cần kiểm soát reactivity ở mức thấp; với các trường hợp thông thường, ref kết hợp watch hoặc composable đơn giản thường dễ bảo trì hơn.",
+    "tags": [
+      "vue",
+      "custom-ref",
+      "reactivity",
+      "debounce",
+      "track",
+      "trigger",
+      "composables"
+    ],
+    "difficulty": "expert"
   }
 ]
