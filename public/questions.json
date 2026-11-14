@@ -484,5 +484,12 @@
       "composables"
     ],
     "difficulty": "expert"
-  }
+  },
+  {
+  "id": "q60",
+  "question": "Trong Vue 3, cơ chế dependency tracking hoạt động như thế nào khi một reactive effect truy cập nhiều reactive properties? Điều gì xảy ra khi dependency thay đổi hoặc không còn được sử dụng trong lần thực thi tiếp theo?",
+  "answer": "Vue 3 sử dụng hệ thống track/trigger để quản lý mối quan hệ giữa reactive effects và các dependencies. Khi một effect chạy, Vue thiết lập active effect hiện tại. Nếu effect truy cập một thuộc tính reactive thông qua Proxy, cơ chế track sẽ ghi nhận mối quan hệ giữa target, key và effect đó. Về mặt khái niệm, Vue tổ chức dependency theo cấu trúc targetMap, trong đó mỗi target ánh xạ tới các dependencies theo từng key. Khi thuộc tính thay đổi, cơ chế trigger tìm các effects đang phụ thuộc vào key tương ứng và lên lịch chạy lại chúng thông qua scheduler. Trước mỗi lần effect chạy lại, Vue cần làm sạch các dependency cũ để tránh tiếp tục theo dõi những thuộc tính không còn được sử dụng. Sau khi chạy, các dependency mới được ghi nhận dựa trên luồng thực thi hiện tại. Ví dụ, nếu effect chỉ đọc state.a khi state.enabled là true và chuyển sang đọc state.b khi điều kiện thay đổi, dependency với state.a sẽ không còn được giữ nếu không được truy cập trong lần chạy mới. Điều này giúp Vue theo dõi dependency chính xác theo nhánh thực thi thay vì tích lũy vô hạn các dependency cũ. Trong triển khai hiện đại, Vue còn sử dụng các kỹ thuật tối ưu dependency marker để giảm chi phí cleanup và tracking. Đây là kiến thức quan trọng khi debug những trường hợp effect chạy không như mong đợi hoặc tối ưu các ứng dụng có lượng reactive dependencies lớn.",
+  "tags": ["vue", "reactivity", "dependency-tracking", "track", "trigger", "reactive-effect", "scheduler"],
+  "difficulty": "expert"
+}
 ]
